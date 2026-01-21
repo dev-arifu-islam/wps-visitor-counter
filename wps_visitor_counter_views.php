@@ -19,13 +19,13 @@
 
 	
 	$ip = wps_getRealIpAddr(); // Getting the user's computer IP
-	$date = date("Y-m-d"); // Getting the current date
-	$date_year_month = date("Y-m");
-	$date_year = date("Y");
-    $yesterday_date = date('Y-m-d',strtotime("-1 days"));
+	$date = current_time('Y-m-d'); // Getting the current date in WordPress timezone
+	$date_year_month = current_time('Y-m');
+	$date_year = current_time('Y');
+    $yesterday_date = date('Y-m-d', strtotime("-1 days"));
 	
 	
-	$timeBefore = time() - 300;
+    $timeBefore = current_time('timestamp') - 300;
 
 
 	$ext = ".gif";
@@ -281,7 +281,7 @@
 	<?php if ($wps_option_data['show_powered_by'] == 1) { 
 
 
-		$wps_return = $wps_return."<div id=\"wpsvcattribution\" ".$style."><small>Powered By <a href=\"https://techmix.xyz/\" rel=\"nofollow\">WPS Visitor Counter</a></small></div>";
+		$wps_return = $wps_return."<div id=\"wpsvcattribution\" ".$style."><small>".sprintf(__('Powered By %s', 'wps-visitor-counter'), '<a href="https://techmix.xyz/" rel="nofollow">WPS Visitor Counter</a>')."</small></div>";
 
 
 		?>

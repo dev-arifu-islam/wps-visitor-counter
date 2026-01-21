@@ -1,0 +1,282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the WPS Visitor Counter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WPS Visitor Counter 1.4.9\n"
+"Report-Msgid-Bugs-To: support@techmix.xyz\n"
+"POT-Creation-Date: 2026-01-21 14:52+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: wps_visitor_counter_views.php:118
+msgid "Users Today"
+msgstr "Usuarios Hoy"
+
+#: wps_visitor_counter_views.php:127
+msgid "Users Yesterday"
+msgstr "Usuarios Ayer"
+
+#: wps_visitor_counter_views.php:137
+msgid "Users  Last 7 days"
+msgstr "Usuarios Últimos 7 días"
+
+#: wps_visitor_counter_views.php:146
+msgid "Users Last 30 days"
+msgstr "Usuarios Últimos 30 días"
+
+#: wps_visitor_counter_views.php:155
+msgid "Users This Month"
+msgstr "Usuarios Este Mes"
+
+#: wps_visitor_counter_views.php:164
+msgid "Users This Year"
+msgstr "Usuarios Este Año"
+
+#: wps_visitor_counter_views.php:178
+msgid "Total Users"
+msgstr "Total de Usuarios"
+
+#: wps_visitor_counter_views.php:188
+msgid "Views Today"
+msgstr "Vistas Hoy"
+
+#: wps_visitor_counter_views.php:199
+msgid "Views Yesterday"
+msgstr "Vistas Ayer"
+
+#: wps_visitor_counter_views.php:208
+msgid "Views Last 7 days"
+msgstr "Vistas Últimos 7 días"
+
+#: wps_visitor_counter_views.php:217
+msgid "Views Last 30 days"
+msgstr "Vistas Últimos 30 días"
+
+#: wps_visitor_counter_views.php:226
+msgid "Views This Month"
+msgstr "Vistas Este Mes"
+
+#: wps_visitor_counter_views.php:237
+msgid "Views This Year"
+msgstr "Vistas Este Año"
+
+#: wps_visitor_counter_views.php:248
+msgid "Total views"
+msgstr "Total de Vistas"
+
+#: wps_visitor_counter_views.php:257
+msgid "Who's Online"
+msgstr "Quién Está En Línea"
+
+#: wps_visitor_counter_views.php:268
+msgid "Your IP Address"
+msgstr "Tu Dirección IP"
+
+#: wps_visitor_counter_views.php:276
+msgid "Server Time"
+msgstr "Hora del Servidor"
+
+#: wps_visitor_counter_views.php:284
+#, php-format
+msgid "Powered By %s"
+msgstr "Desarrollado por %s"
+
+#: wps-visitor-counter-options-general.php:3
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tienes suficientes permisos para acceder a esta página."
+
+#: wps-visitor-counter-options-general.php:12
+msgid "Plugin Options WPS Visitor Counter"
+msgstr "Opciones del Plugin Contador de Visitantes WPS"
+
+#: wps-visitor-counter-options-general.php:20
+msgid "Recommended Web Hosting"
+msgstr "Alojamiento Web Recomendado"
+
+#: wps-visitor-counter-options-general.php:44
+msgid "Title:"
+msgstr "Título:"
+
+#: wps-visitor-counter-options-general.php:49
+msgid "Font Color:"
+msgstr "Color de Fuente:"
+
+#: wps-visitor-counter-options-general.php:56
+msgid "To change the font color, select the color with color picker."
+msgstr "Para cambiar el color de fuente, selecciona el color con el selector de color."
+
+#: wps-visitor-counter-options-general.php:57
+msgid "<b>PLugin Options</b>"
+msgstr "<b>Opciones del Plugin</b>"
+
+#: wps-visitor-counter-options-general.php:64
+msgid "Enable Users Today display?"
+msgstr "¿Habilitar visualización de Usuarios Hoy?"
+
+#: wps-visitor-counter-options-general.php:65
+msgid "Enable Users Yesterday display?"
+msgstr "¿Habilitar visualización de Usuarios Ayer?"
+
+#: wps-visitor-counter-options-general.php:67
+msgid "Enable Users Last 7 Days display?"
+msgstr "¿Habilitar visualización de Usuarios Últimos 7 días?"
+
+#: wps-visitor-counter-options-general.php:69
+msgid "Enable Users Last 30 Days display?"
+msgstr "¿Habilitar visualización de Usuarios Últimos 30 días?"
+
+#: wps-visitor-counter-options-general.php:71
+msgid "Enable Users This Month display?"
+msgstr "¿Habilitar visualización de Usuarios Este Mes?"
+
+#: wps-visitor-counter-options-general.php:72
+msgid "Enable Users This Year display?"
+msgstr "¿Habilitar visualización de Usuarios Este Año?"
+
+#: wps-visitor-counter-options-general.php:73
+msgid "Enable Total Users display?"
+msgstr "¿Habilitar visualización de Total de Usuarios?"
+
+#: wps-visitor-counter-options-general.php:74
+msgid "Enable views Today display?"
+msgstr "¿Habilitar visualización de Vistas Hoy?"
+
+#: wps-visitor-counter-options-general.php:76
+msgid "Enable views Yesterday display?"
+msgstr "¿Habilitar visualización de Vistas Ayer?"
+
+#: wps-visitor-counter-options-general.php:79
+msgid "Enable views Last 7 Days display?"
+msgstr "¿Habilitar visualización de Vistas Últimos 7 días?"
+
+#: wps-visitor-counter-options-general.php:81
+msgid "Enable views Last 30 Days display?"
+msgstr "¿Habilitar visualización de Vistas Últimos 30 días?"
+
+#: wps-visitor-counter-options-general.php:84
+msgid "Enable views This Month display?"
+msgstr "¿Habilitar visualización de Vistas Este Mes?"
+
+#: wps-visitor-counter-options-general.php:85
+msgid "Enable views This Year display?"
+msgstr "¿Habilitar visualización de Vistas Este Año?"
+
+#: wps-visitor-counter-options-general.php:89
+msgid "Enable Total views display?"
+msgstr "¿Habilitar visualización de Total de Vistas?"
+
+#: wps-visitor-counter-options-general.php:90
+msgid "Enable Whos Online display?"
+msgstr "¿Habilitar visualización de Quién Está En Línea?"
+
+#: wps-visitor-counter-options-general.php:91
+msgid "Enable IP address display?"
+msgstr "¿Habilitar visualización de Dirección IP?"
+
+#: wps-visitor-counter-options-general.php:92
+msgid "Enable Server Time display?"
+msgstr "¿Habilitar visualización de Hora del Servidor?"
+
+#: wps-visitor-counter-options-general.php:93
+msgid "Plugins align?"
+msgstr "¿Alineación del plugin?"
+
+#: wps-visitor-counter-options-general.php:95
+msgid "wps_visitor_wpsvc_align"
+msgstr "wps_visitor_wpsvc_align"
+
+#: wps-visitor-counter-options-general.php:96
+msgid "Left"
+msgstr "Izquierda"
+
+#: wps-visitor-counter-options-general.php:97
+msgid "Center"
+msgstr "Centro"
+
+#: wps-visitor-counter-options-general.php:98
+msgid "Right"
+msgstr "Derecha"
+
+#: wps-visitor-counter-options-general.php:100
+#: wps-visitor-counter-options-general.php:213
+msgid "Save Changes"
+msgstr "Guardar Cambios"
+
+#: wps-visitor-counter-options-general.php:105
+msgid "The way of use"
+msgstr "Forma de uso"
+
+#: wps-visitor-counter-options-general.php:106
+msgid ""
+"Use this <b>\"[wps_visitor_counter]\"</b> shortcode or use in your "
+"registered widget."
+msgstr ""
+"Usa este código corto <b>\"[wps_visitor_counter]\"</b> o úsalo en tu "
+"widget registrado."
+
+#: wps-visitor-counter-options-general.php:111
+msgid "Reset Plugin Data"
+msgstr "Restablecer Datos del Plugin"
+
+#: wps-visitor-counter-options-general.php:115
+msgid "Check for reset"
+msgstr "Marcar para restablecer"
+
+#: wps-visitor-counter-options-general.php:116
+msgid "Reset Data"
+msgstr "Restablecer Datos"
+
+#: wps-visitor-counter-options-general.php:129
+msgid "Google AdSense"
+msgstr "Google AdSense"
+
+#: wps-visitor-counter-options-general.php:137
+msgid "Follow us"
+msgstr "Síguenos"
+
+#: wps-visitor-counter-options-general.php:144
+msgid "Image Counter"
+msgstr "Contador de Imágenes"
+
+#: wps-visitor-counter-options-general.php:211
+msgid ""
+"Show powered by <a href=\"https://techmix.xyz/\">WPS Visitor Counter</a>? "
+msgstr ""
+"¿Mostrar desarrollado por <a href=\"https://techmix.xyz/\">WPS Visitor Counter</a>? "
+
+#: wps-visitor-counter-widgets.php:7
+msgid "Display Visitor Counter and Statistics Traffic in shortcode and widget"
+msgstr "Mostrar Contador de Visitantes y Estadísticas de Tráfico en shortcode y widget"
+
+#: wps-visitor-counter-widgets.php:9
+msgid "WPS - Visitor Counter"
+msgstr "WPS - Contador de Visitantes"
+
+#: wps-gutenberg-block.js:7
+msgid "WPS Visitor Counter"
+msgstr "Contador de Visitantes WPS"
+
+#: wps-gutenberg-block.js:11
+msgid "visitor"
+msgstr "visitante"
+
+#: wps-gutenberg-block.js:12
+msgid "counter"
+msgstr "contador"
+
+#: wps-gutenberg-block.js:13
+msgid "statistics"
+msgstr "estadísticas"
+
+#: wps-gutenberg-block.js:35
+msgid "Visitor counter will be displayed here on the frontend."
+msgstr "El contador de visitantes se mostrará aquí en el frontend."

@@ -167,29 +167,31 @@ function wps_visitor_counter_activation_hook(){
 	global $wpdb;
 	if ( $wpdb->get_var('SHOW TABLES LIKE "' . WPS_VC_TABLE_NAME . '"') != WPS_VC_TABLE_NAME ) {
 		$sql = "";
+		$charset_collate = $wpdb->get_charset_collate();
 		$sql = "CREATE TABLE IF NOT EXISTS `". WPS_VC_TABLE_NAME . "` (";
-		$sql .= "`ip` varchar(20) NOT NULL default '',";
+		$sql .= "`ip` varchar(45) NOT NULL default '',";
 		$sql .= "`date` date NOT NULL,";
-		$sql .= "`views` int(10) NOT NULL default '1',";
+		$sql .= "`views` int(10) UNSIGNED NOT NULL default '1',";
 		$sql .= "`online` varchar(255) NOT NULL,";
 		$sql .= "PRIMARY KEY  (`ip`,`date`)";
-		$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+		$sql .= ") ENGINE=InnoDB $charset_collate;";
 		$wpdb->query($sql);
 	}
 	if ( $wpdb->get_var('SHOW TABLES LIKE "' . WPS_VC_OPTIONS_TABLE_NAME . '"') != WPS_VC_OPTIONS_TABLE_NAME ) {
 		$sql = "";
+		$charset_collate = $wpdb->get_charset_collate();
 		$sql = "CREATE TABLE IF NOT EXISTS `". WPS_VC_OPTIONS_TABLE_NAME . "` (";
-		$sql .= "`id` INT(10) NOT NULL AUTO_INCREMENT,";
+		$sql .= "`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,";
 		$sql .= "`display_field` VARCHAR(600) NOT NULL default ',today_user,yesterday_user,last7_day_user,last30_day_user,month_user,year_user,total_user,today_view,yesterday_view,last7_day_view,last30_day_view,month_view,year_view,total_view,online_view,ip_display,server_time',";
-		$sql .= "`show_powered_by` INT(1) NOT NULL DEFAULT '1',";
-		$sql .= "`font_color` VARCHAR(25) NOT NULL DEFAULT '#000000',";
+		$sql .= "`show_powered_by` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',";
+		$sql .= "`font_color` VARCHAR(7) NOT NULL DEFAULT '#000000',";
 		$sql .= "`style` VARCHAR(25) NOT NULL DEFAULT 'text/effect-white',";
 		$sql .= "`visitor_title` VARCHAR(255) NOT NULL default 'Our Visitor',";
-		$sql .= "`user_start` INT(255) NOT NULL DEFAULT '1',";
-		$sql .= "`views_start` INT(255) NOT NULL DEFAULT '1',";
-		$sql .= "`visitor_wpsvc_align` VARCHAR(25) NOT NULL DEFAULT 'wps_visitor_wpsvc_align',";
+		$sql .= "`user_start` INT(10) UNSIGNED NOT NULL DEFAULT '1',";
+		$sql .= "`views_start` INT(10) UNSIGNED NOT NULL DEFAULT '1',";
+		$sql .= "`visitor_wpsvc_align` VARCHAR(25) NOT NULL DEFAULT 'center',";
 		$sql .= "PRIMARY KEY (`id`)";
-		$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+		$sql .= ") ENGINE=InnoDB $charset_collate;";
 		$wpdb->query($sql);
 		$sql = $wpdb->prepare("INSERT INTO `". WPS_VC_OPTIONS_TABLE_NAME . "`(`id`) VALUES (%d)",1);
 		$wpdb->query($sql);

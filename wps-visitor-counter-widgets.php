@@ -1,13 +1,12 @@
 <?php
 class wps_visitor_counter extends WP_Widget{
 
-	function __construct(){
-		$paramitter=array(
-		'description' => __('Display Visitor Counter and Statistics Traffic in shortcode and widget', 'wps-visitor-counter'), //plugin description
-		'name' => 'WPS - Visitor Counter'  //title of plugin
+	public function __construct(){
+		$widget_ops = array(
+			'classname' => 'wps_visitor_counter',
+			'description' => __('Display Visitor Counter and Statistics Traffic in shortcode and widget', 'wps-visitor-counter'),
 		);
-
-		parent::__construct('wps_visitor_counter', '', $paramitter);
+		parent::__construct('wps_visitor_counter', __('WPS - Visitor Counter', 'wps-visitor-counter'), $widget_ops);
 	}
 	
 	public function widget($args, $instance){

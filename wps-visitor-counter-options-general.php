@@ -1,5 +1,5 @@
 <?php
-if (!current_user_can('administrator'))  {
+if (!current_user_can('manage_options')) {
 	wp_die( __('You do not have sufficient permissions to access this page.', 'wps-visitor-counter') );
 }
 
@@ -41,12 +41,12 @@ $wps_option_data = wps_visitor_option_data(1);
         		?>
         		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>" class="wps_plugin_main_form">
         			<?php wp_nonce_field('wps_my_front_end_setting'); ?>
-				<div><label for="wps_visitor_title"><?php _e('Title:', 'wps-visitor-counter')?> <input class="widefat" id="wps_visitor_titletitle" name="wps_visitor_title" type="text" value="<?php echo esc_html($wps_option_data['visitor_title']);?>" /></label></div>
+				<div><label for="wps_visitor_title"><?php _e('Title:', 'wps-visitor-counter')?> <input class="widefat" id="wps_visitor_titletitle" name="wps_visitor_title" type="text" value="<?php echo esc_attr($wps_option_data['visitor_title']);?>" /></label></div>
 				<?php
 wp_enqueue_script('wp-color-picker');
 wp_enqueue_style( 'wp-color-picker' );
 ?>
-	<div><label for="wps_visitor_font_color"><?php _e('Font Color:', 'wps-visitor-counter')?> </label><input class="widefat" id="wps_visitor_font_color" data-default-color="#000000" name="wps_visitor_font_color" type="text" value="<?php echo esc_html($wps_option_data['font_color']);?>" /></div>
+	<div><label for="wps_visitor_font_color"><?php _e('Font Color:', 'wps-visitor-counter')?> </label><input class="widefat" id="wps_visitor_font_color" data-default-color="#000000" name="wps_visitor_font_color" type="text" value="<?php echo esc_attr($wps_option_data['font_color']);?>" /></div>
 <script type="text/javascript">
 				jQuery(document).ready(function($) {   
 					$('#wps_visitor_font_color').wpColorPicker();
@@ -56,9 +56,9 @@ wp_enqueue_style( 'wp-color-picker' );
 	<div><font size='2'><?php _e('To change the font color, select the color with color picker.', 'wps-visitor-counter')?> </font></div>
 	<div><font size='3'><?php _e('<b>PLugin Options</b>', 'wps-visitor-counter')?></font></div>
 	<!-- UPDATE PLAN -->
-	<div><label for="wps_visitor_user_start">Users Count Start: <input class="widefat" id="wps_visitor_user_start" name="wps_visitor_user_start" type="number" min="0" value="<?php echo esc_html($wps_option_data['user_start']);?>" /></label></div>
+	<div><label for="wps_visitor_user_start">Users Count Start: <input class="widefat" id="wps_visitor_user_start" name="wps_visitor_user_start" type="number" min="0" value="<?php echo esc_attr($wps_option_data['user_start']);?>" /></label></div>
 	<div><font size='2'>Fill in with numbers to start the initial calculation of the user counter, if the empty counter will start from 1</font></div>
-	<div><label for="wps_visitor_views_start">views Start: <input class="widefat" id="wps_visitor_views_start" name="wps_visitor_views_start" type="number" min="0" value="<?php echo esc_html($wps_option_data['views_start']);?>" /></label></div>
+	<div><label for="wps_visitor_views_start">views Start: <input class="widefat" id="wps_visitor_views_start" name="wps_visitor_views_start" type="number" min="0" value="<?php echo esc_attr($wps_option_data['views_start']);?>" /></label></div>
 	<div><font size='2'>Fill in the numbers to start the initial calculation of the views, if the empty views will start from 1</font></div>
 	<!-- END UPDATE -->
 	<div><label for="wps_visitor_today_user"><?php _e('Enable Users Today display?', 'wps-visitor-counter')?> <input type="checkbox" class="checkbox" <?php if (in_array("today_user", $wps_display_field_arr)) {echo "checked";} ?> id="wps_visitor_today_user" name="wps_visitor_today_user" /></label></div>
@@ -91,7 +91,7 @@ wp_enqueue_style( 'wp-color-picker' );
 	<div><label for="wps_visitor_ip_display"><?php _e('Enable IP address display?', 'wps-visitor-counter')?> <input type="checkbox" class="checkbox" <?php if (in_array("ip_display", $wps_display_field_arr)) {echo "checked";} ?> id="wps_visitor_ip_display" name="wps_visitor_ip_display" /></label></div>
 	<div><label for="wps_visitor_server_time"><?php _e('Enable Server Time display?', 'wps-visitor-counter')?> <input type="checkbox" class="checkbox" <?php if (in_array("server_time", $wps_display_field_arr)) {echo "checked";} ?> id="wps_visitor_server_time" name="wps_visitor_server_time" /></label></div>
 	<div><label for="wps_visitor_wpsvc_align"><?php _e('Plugins align?', 'wps-visitor-counter')?> 
-	<select class="select" id="wps_visitor_wpsvc_align" name="wps_visitor_wpsvc_align" selected="<?php echo $wps_option_data['visitor_wpsvc_align'];?>">
+	<select class="select" id="wps_visitor_wpsvc_align" name="wps_visitor_wpsvc_align">
 	<option value="left"><?php _e('wps_visitor_wpsvc_align', 'wps-visitor-counter') ?></option>
 	<option value="left" <?php if($wps_option_data['visitor_wpsvc_align'] == 'left'){echo "selected";}?>><?php _e('Left', 'wps-visitor-counter') ?></option>
 	<option value="center" <?php if($wps_option_data['visitor_wpsvc_align'] == 'center'){echo "selected";}?>><?php _e('Center', 'wps-visitor-counter') ?></option>

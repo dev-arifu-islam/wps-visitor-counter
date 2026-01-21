@@ -66,6 +66,21 @@ function wps_visitor_counter_admin_menu() {
 	add_options_page('Plugin Stats WPS', 'WPS Visitor Counter', "manage_options", 'wps_options_general', 'wps_visitor_counter_option');
 }
 
+/**
+ * Add "Settings" link on Plugins list page.
+ */
+function wps_visitor_counter_plugin_action_links( $links ) {
+	if ( current_user_can( 'manage_options' ) ) {
+		$settings_url = admin_url( 'options-general.php?page=wps_options_general' );
+		array_unshift(
+			$links,
+			'<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'wps-visitor-counter' ) . '</a>'
+		);
+	}
+
+	return $links;
+}
+
 
 function wps_visitor_counter_deactivation_hook(){
 	// global $wpdb;
@@ -99,6 +114,7 @@ register_activation_hook(__FILE__, 'wps_visitor_counter_activation_hook');
 register_deactivation_hook(__FILE__, 'wps_visitor_counter_deactivation_hook');
 add_action('widgets_init', 'wps_visitor_counter_widgets_init');
 add_action('admin_menu', 'wps_visitor_counter_admin_menu');
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'wps_visitor_counter_plugin_action_links' );
 add_action('plugins_loaded', function() {
       load_plugin_textdomain( 'wps-visitor-counter', false, basename( dirname( __FILE__ ) ) . '/languages/' );
     });

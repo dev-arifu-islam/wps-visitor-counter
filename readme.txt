@@ -166,14 +166,12 @@ Yes. In every geographical location, for any amount of visitors, or on any WordP
 
 = 1.4.9 =
 * Updated for WordPress 6.9 compatibility
-* Improved security with proper nonce verification and capability checks
-* Updated database schema to use modern MySQL practices and proper charset
-* Fixed Gutenberg block registration to use modern WordPress API
-* Updated widget constructor to use modern PHP standards
-* Added proper input sanitization and output escaping
-* Updated enqueue scripts to use proper WordPress dependencies and versions
-* Improved IP address detection and AJAX handling
-* Added complete translation support with Spanish (es_ES) included
+* **Security Hardening**: Fixed XSS vulnerabilities, added input sanitization, capability checks, and ABSPATH protection
+* **SQL Injection Prevention**: Converted all queries to use prepared statements with proper escaping
+* **Code Quality**: Fixed PHPCS/WPCS violations, added translators comments, proper escaping throughout
+* **UI Improvements**: Added Settings link to plugin list, display server date+time, removed flagged affiliate content
+* **Plugin Compliance**: Fixed plugin name, readme tags/description, added proper license headers
+* **Translation**: Removed discouraged load_plugin_textdomain, improved i18n support
 
 == Arbitrary section ==
 

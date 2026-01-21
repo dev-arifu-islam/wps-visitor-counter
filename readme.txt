@@ -1,14 +1,14 @@
 
-=== WPS Visitor Counter Plugin ===
+=== WPS Visitor Counter ===
 Contributors: arifulislamsobuj, techmix
-Tags: website visitor counter, Visitor counter, visitor traffic, traffic statistics, traffic counter, blog stats, blog traffic, traffic count, visitor view count, visitor counter wordpress, visitor counter wp, website hit counter
+Tags: visitor counter, traffic statistics, website counter, blog stats, hit counter
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.4.9
 License: GPLv2 or later
 
-WPS Visitor Counter plugin will display your websites traffic statistics at front end. This Plugin support Widget, Shortcode, Gutenberg Block and full internationalization (i18n) with translation support. Some of the features offered include Today Visitors, Today Views, Yesterday Visitors, Yesterday Views, This Month Visitors, This Month Views, Total Visitors, Total Views, Who's Online and IP Address display.
+Display website visitor statistics with widget, shortcode, and Gutenberg block support.
 
 == Description ==
 

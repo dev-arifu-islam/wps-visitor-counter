@@ -11,6 +11,7 @@ class wps_visitor_counter extends WP_Widget{
 	}
 	
 	public function widget($args, $instance){
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Function returns escaped HTML.
 		echo wps_add_visitor_counter();
 	}
 }

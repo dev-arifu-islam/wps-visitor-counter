@@ -24,26 +24,21 @@ add_action('wp_ajax_nopriv_wps_count_page_visit', 'wps_count_page_visit');
 function wps_count_page_visit() {
 	check_ajax_referer( 'wps-nonce', 'nonce' );
 
-	if (!wp_doing_ajax()) {
-		wp_die('Invalid request');
+	if ( ! wp_doing_ajax() ) {
+		wp_die( 'Invalid request' );
 	}
 
 	global $wpdb;
-	$ip = wps_getRealIpAddr(); // Getting the user's computer IP
-	$date = current_time('Y-m-d'); // Getting the current date in WordPress timezone
-	$waktu = current_time('timestamp'); // Getting current timestamp
 
-	// Use proper table name with prepare
-	$table_name = WPS_VC_TABLE_NAME;
-	$sql = $wpdb->prepare(
-		"INSERT INTO `{$table_name}` (`ip`, `date`, `views`, `online`) VALUES (%s, %s, 1, %s) ON DUPLICATE KEY UPDATE `views` = `views` + 1, `online` = %s",
-		$ip,
-		$date,
-		$waktu,
-		$waktu
-	);
+	$ip    = wps_getRealIpAddr();
+	$date  = current_time( 'Y-m-d' );
+	$waktu = current_time( 'timestamp' );
 
-	$wpdb->query($sql);
+	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Table name is a constant; direct query needed for visitor statistics.
+	$wpdb->query( $wpdb->prepare( "INSERT INTO `" . WPS_VC_TABLE_NAME . "` (`ip`, `date`, `views`, `online`) VALUES (%s, %s, 1, %d) ON DUPLICATE KEY UPDATE `views` = `views` + 1, `online` = %d", $ip, $date, $waktu, $waktu ) );
+
+
 	wp_die();
 }
+
 ?>

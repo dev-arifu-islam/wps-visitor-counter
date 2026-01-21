@@ -1,5 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
+	// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Direct queries needed for custom visitor statistics table.
 	function wps_add_visitor_counter() {
 		global $wpdb;
 		$wps_option_data = wps_visitor_option_data(1);
@@ -24,7 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	$server_datetime = current_time( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); // Display date + time
 	$date_year_month = current_time('Y-m');
 	$date_year = current_time('Y');
-    $yesterday_date = date('Y-m-d', strtotime("-1 days"));
+	$yesterday_timestamp = current_time('timestamp') - 86400; // Subtract one day in seconds.
+	$yesterday_date = date_i18n('Y-m-d', $yesterday_timestamp);
 	
 	
     $timeBefore = current_time('timestamp') - 300;
@@ -33,6 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	$ext = ".gif";
 	//image print
 	// UPDATE PLAN
+	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Table name is a constant; direct query needed for visitor statistics.
 	$user_total = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "`" );
 	if ($user_start==NULL) {
 	$total_user_views = sprintf("%06d", $user_total);
@@ -115,6 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	
 	<?php if (in_array("today_user", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$user_today = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $date ) );
 
 		$wps_return = $wps_return."<div id=\"wpsvcvisit\" ".$style.">".$imgvisit." ".esc_html__('Users Today', 'wps-visitor-counter')." : ".$user_today."</div>";
@@ -123,6 +127,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		
 	<?php } ?>
 	<?php if (in_array("yesterday_user", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$user_yesterday = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $yesterday_date ) );
 
 
@@ -133,6 +138,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<?php } ?>
 
 	<?php if (in_array("last7_day_user", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$user_last_7days = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` >= DATE(NOW()) - INTERVAL 7 DAY" );
 
 
@@ -142,6 +148,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("last30_day_user", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$user_last_30days = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` >= DATE(NOW()) - INTERVAL 30 DAY" );
 
 
@@ -151,6 +158,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("month_user", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$user_month = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year_month . '%' ) );
 
 
@@ -160,6 +168,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("year_user", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$user_year = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year . '%' ) );
 
 
@@ -184,6 +193,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("today_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$views_today= $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $date ) );
 
 
@@ -193,6 +203,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("yesterday_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$views_yesterday = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $yesterday_date ) );
 		if ($views_yesterday=="") {
 			$views_yesterday==0;
@@ -204,6 +215,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("last7_day_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$views_last7_days = $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` >= DATE(NOW()) - INTERVAL 7 DAY" );
 
 
@@ -213,6 +225,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("last30_day_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$views_last30_days = $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` >= DATE(NOW()) - INTERVAL 30 DAY" );
 
 
@@ -222,6 +235,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("month_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$views_month = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year_month . '%' ) );
 
 
@@ -233,6 +247,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	
 	<?php if (in_array("year_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$views_year = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year . '%' ) );
 
 
@@ -242,6 +257,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("total_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$totalviews = $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "`" );
 		 if ($views_start!=NULL) {
 				$totalviews = $totalviews + $views_start;
@@ -253,6 +269,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		?>
 	<?php } ?>
 	<?php if (in_array("online_view", $wps_display_field_arr)) { 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is a constant, cannot be prepared.
 		$total_online = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `online` > %d", $timeBefore ) );
 
 
@@ -281,7 +298,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<?php } ?>	
 	<?php if ($wps_option_data['show_powered_by'] == 1) { 
 
-
+		/* translators: %s: Link to plugin website */
 		$wps_return = $wps_return."<div id=\"wpsvcattribution\" ".$style."><small>".sprintf(__('Powered By %s', 'wps-visitor-counter'), '<a href="https://techmix.xyz/" rel="nofollow">WPS Visitor Counter</a>')."</small></div>";
 
 
@@ -290,6 +307,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	$wps_return = $wps_return."</div>";
 	return $wps_return;
+	// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 	?>
 
 	

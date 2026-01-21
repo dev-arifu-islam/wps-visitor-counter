@@ -1,18 +1,20 @@
 <?php
 /*
-Plugin Name: WPS Visitor Counter Plugin
+Plugin Name: WPS Visitor Counter
 Plugin URI: https://techmix.xyz/downloads/wps-visitor-counter-plugin-for-wordpress/
 Description: WPS Visitor Counter plugin will display your websites traffic statistics at front end. This Plugin support Widget, Shortcode and Gutenberg Block.
 Version: 1.4.9
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wps-visitor-counter
 Domain Path: /languages
 Author: TechMix
 Author URI: https://techmix.xyz/
 */
-
+if ( ! defined( 'ABSPATH' ) ) exit;
 if ( ! function_exists( 'wps_getRealIpAddr' ) ) {
 	function wps_getRealIpAddr() {
 		$ip_headers = [
@@ -28,7 +30,8 @@ if ( ! function_exists( 'wps_getRealIpAddr' ) ) {
 
 		foreach ($ip_headers as $key) {
 			if (!empty($_SERVER[$key])) {
-				foreach (explode(',', $_SERVER[$key]) as $ip) {
+				$raw_value = sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
+				foreach (explode(',', $raw_value) as $ip) {
 					$ip = trim($ip);
 					// Validate IP and exclude private/reserved ranges
 					if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
@@ -39,7 +42,7 @@ if ( ! function_exists( 'wps_getRealIpAddr' ) ) {
 		}
 
 		// Fallback
-		return sanitize_text_field($_SERVER['REMOTE_ADDR'] ?? '127.0.0.1');
+		return sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1' ) );
 	}
 }
 
@@ -115,9 +118,6 @@ register_deactivation_hook(__FILE__, 'wps_visitor_counter_deactivation_hook');
 add_action('widgets_init', 'wps_visitor_counter_widgets_init');
 add_action('admin_menu', 'wps_visitor_counter_admin_menu');
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'wps_visitor_counter_plugin_action_links' );
-add_action('plugins_loaded', function() {
-      load_plugin_textdomain( 'wps-visitor-counter', false, basename( dirname( __FILE__ ) ) . '/languages/' );
-    });
 
 
 
@@ -132,7 +132,7 @@ function wps_visitor_init() {
         if ( function_exists( 'register_block_type' ) ) {
             wp_register_script(
                 'wps-visitor-gutenberg-editor-scripts',
-                plugin_dir_url(__FILE__) . 'wps-gutenberg-block.js',
+                esc_url( plugin_dir_url(__FILE__) . 'wps-gutenberg-block.js' ),
                 array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ),
                 '1.4.9',
                 true

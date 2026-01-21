@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 	function wps_add_visitor_counter() {
 		global $wpdb;
 		$wps_option_data = wps_visitor_option_data(1);
@@ -19,7 +20,8 @@
 
 	
 	$ip = wps_getRealIpAddr(); // Getting the user's computer IP
-	$date = current_time('Y-m-d'); // Getting the current date in WordPress timezone
+	$date = current_time('Y-m-d'); // Getting the current date in WordPress timezone (date only)
+	$server_datetime = current_time( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); // Display date + time
 	$date_year_month = current_time('Y-m');
 	$date_year = current_time('Y');
     $yesterday_date = date('Y-m-d', strtotime("-1 days"));
@@ -113,7 +115,7 @@
 
 	
 	<?php if (in_array("today_user", $wps_display_field_arr)) { 
-		$user_today = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = '$date'" );
+		$user_today = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $date ) );
 
 		$wps_return = $wps_return."<div id=\"wpsvcvisit\" ".$style.">".$imgvisit." ".esc_html__('Users Today', 'wps-visitor-counter')." : ".$user_today."</div>";
 
@@ -121,7 +123,7 @@
 		
 	<?php } ?>
 	<?php if (in_array("yesterday_user", $wps_display_field_arr)) { 
-		$user_yesterday = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = '$yesterday_date'" );
+		$user_yesterday = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $yesterday_date ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvcyesterday\" ".$style.">".$img_visit_yesterday." ".esc_html__('Users Yesterday', 'wps-visitor-counter')." : ".$user_yesterday."</div>";
@@ -149,7 +151,7 @@
 		?>
 	<?php } ?>
 	<?php if (in_array("month_user", $wps_display_field_arr)) { 
-		$user_month = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE '$date_year_month%'" );
+		$user_month = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year_month . '%' ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvcmonth\" ".$style.">".$img_visit_month." ".esc_html__('Users This Month', 'wps-visitor-counter')." : ".$user_month."</div>";
@@ -158,7 +160,7 @@
 		?>
 	<?php } ?>
 	<?php if (in_array("year_user", $wps_display_field_arr)) { 
-		$user_year = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE '$date_year%'" );
+		$user_year = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year . '%' ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvcyear\" ".$style.">".$img_visit_year." ".esc_html__('Users This Year', 'wps-visitor-counter')." : ".$user_year."</div>";
@@ -182,7 +184,7 @@
 		?>
 	<?php } ?>
 	<?php if (in_array("today_view", $wps_display_field_arr)) { 
-		$views_today= $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = '$date'" );
+		$views_today= $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $date ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvcviews\" ".$style.">".$imgviews." ".esc_html__('Views Today', 'wps-visitor-counter')." : ".$views_today."</div>";
@@ -191,7 +193,7 @@
 		?>
 	<?php } ?>
 	<?php if (in_array("yesterday_view", $wps_display_field_arr)) { 
-		$views_yesterday = $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = '$yesterday_date'" );
+		$views_yesterday = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` = %s", $yesterday_date ) );
 		if ($views_yesterday=="") {
 			$views_yesterday==0;
 		}
@@ -220,7 +222,7 @@
 		?>
 	<?php } ?>
 	<?php if (in_array("month_view", $wps_display_field_arr)) { 
-		$views_month = $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE '$date_year_month%'" );
+		$views_month = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year_month . '%' ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvcviews\" ".$style.">".$img_views_month." ".esc_html__('Views This Month', 'wps-visitor-counter')." : ".$views_month."</div>";
@@ -231,7 +233,7 @@
 
 	
 	<?php if (in_array("year_view", $wps_display_field_arr)) { 
-		$views_year = $wpdb->get_var( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE '$date_year%'" );
+		$views_year = $wpdb->get_var( $wpdb->prepare( "SELECT SUM(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `date` LIKE %s", $date_year . '%' ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvcviews\" ".$style.">".$img_views_year." ".esc_html__('Views This Year', 'wps-visitor-counter')." : ".$views_year."</div>";
@@ -251,7 +253,7 @@
 		?>
 	<?php } ?>
 	<?php if (in_array("online_view", $wps_display_field_arr)) { 
-		$total_online = $wpdb->get_var( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `online` > '$timeBefore'" );
+		$total_online = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(`views`) FROM `". WPS_VC_TABLE_NAME . "` WHERE `online` > %d", $timeBefore ) );
 
 
 		$wps_return = $wps_return."<div id=\"wpsvconline\" ".$style.">".$imgonline." ".esc_html__('Who\'s Online', 'wps-visitor-counter')." : ".$total_online."</div>";
@@ -272,8 +274,7 @@
 	<?php } ?>
 	<?php if (in_array("server_time", $wps_display_field_arr)) { 
 
-
-		$wps_return = $wps_return."<div id=\"wpsvcdate\">".$img_visit_year." ".esc_html__('Server Time', 'wps-visitor-counter')." : ".$date."</div>";
+		$wps_return = $wps_return."<div id=\"wpsvcdate\">".$img_visit_year." ".esc_html__('Server Time', 'wps-visitor-counter')." : ".esc_html( $server_datetime )."</div>";
 
 
 		?>

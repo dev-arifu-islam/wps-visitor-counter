@@ -1,6 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 if (isset($_POST['reset_wpsvc'])) {
+	if (!current_user_can('manage_options')) {
+		wp_die(__('You do not have sufficient permissions to access this page.', 'wps-visitor-counter'));
+	}
 	$retrieved_nonce = $_POST['_wpnonce'];
 	if (wp_verify_nonce($retrieved_nonce, 'wps_table_reset')) {
 		wps_visitor_counter_truncate();
@@ -8,6 +11,9 @@ if (isset($_POST['reset_wpsvc'])) {
 	
 }
 if (isset($_POST['style_setting'])) {
+	if (!current_user_can('manage_options')) {
+		wp_die(__('You do not have sufficient permissions to access this page.', 'wps-visitor-counter'));
+	}
 	$retrieved_nonce = $_POST['_wpnonce'];
 	if (wp_verify_nonce($retrieved_nonce, 'wps_my_front_end_style')) {
 		$image_styel="";
@@ -24,6 +30,9 @@ if (isset($_POST['style_setting'])) {
 	}
 }
 if (isset($_POST['wps_view_setting'])) {
+	if (!current_user_can('manage_options')) {
+		wp_die(__('You do not have sufficient permissions to access this page.', 'wps-visitor-counter'));
+	}
 	$retrieved_nonce = $_POST['_wpnonce'];
 	if (wp_verify_nonce($retrieved_nonce, 'wps_my_front_end_setting')) {
 	

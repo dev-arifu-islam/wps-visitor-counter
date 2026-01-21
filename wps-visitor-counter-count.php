@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 function wps_enqueue_scripts() {
 		if ( !is_admin() ) {
 			wp_enqueue_script( 'wps-visitor-counter', plugin_dir_url( __FILE__ ) . 'styles/js/custom.js', array( 'jquery' ), '1.4.9', false );

@@ -39,7 +39,7 @@ $wps_option_data = wps_visitor_option_data(1);
         		$wps_display_field = $wps_option_data['display_field'];
         		$wps_display_field_arr = explode(",",$wps_display_field);
         		?>
-        		<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>" class="wps_plugin_main_form">
+        		<form method="post" action="<?php echo esc_url_raw( $_SERVER["REQUEST_URI"] ); ?>" class="wps_plugin_main_form">
         			<?php wp_nonce_field('wps_my_front_end_setting'); ?>
 				<div><label for="wps_visitor_title"><?php _e('Title:', 'wps-visitor-counter')?> <input class="widefat" id="wps_visitor_titletitle" name="wps_visitor_title" type="text" value="<?php echo esc_attr($wps_option_data['visitor_title']);?>" /></label></div>
 				<?php
@@ -109,7 +109,7 @@ wp_enqueue_style( 'wp-color-picker' );
 		<div class="wpsvc_plugins_text">
 			<div class="wpsvc_option_wrap">
 				<h3 class="hndle"><?php _e('Reset Plugin Data', 'wps-visitor-counter') ?></h3>
-				<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+				<form method="post" action="<?php echo esc_url_raw( $_SERVER["REQUEST_URI"] ); ?>">
 					<?php wp_nonce_field('wps_table_reset'); ?>
 			        <p style="margin-top:20px;" >
 					<?php _e('Check for reset', 'wps-visitor-counter'); ?> <input type="checkbox" class="checkbox" id="reset_wpsvc" name="reset_wpsvc" />
@@ -142,7 +142,7 @@ wp_enqueue_style( 'wp-color-picker' );
 	<div class="wpsvc_option_wrap">
 	<div class="wpsvc_plugins_text">
 	<h3 class="hndle"><?php _e('Image Counter', 'wps-visitor-counter') ?></h3>
-	<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+	<form method="post" action="<?php echo esc_url_raw( $_SERVER["REQUEST_URI"] ); ?>">
 		<?php wp_nonce_field('wps_my_front_end_style'); ?>
 
 
@@ -161,15 +161,15 @@ wp_enqueue_style( 'wp-color-picker' );
             foreach ($groups as $style_name => $style) {
 ?>
 					
- 					<p><b>Choose one of the <?php echo $style_name; ?> counter styles below:</b></p>
+ 					<p><b>Choose one of the <?php echo esc_html( $style_name ); ?> counter styles below:</b></p>
 						<table class="form-table">
 						<?php
                 foreach ($style as $name) {
                     ?>
                     	<tr>
                 		<td>
-                		<input type="radio" id="img1" name="wps_visitor_counter_style" value="<?php echo 'image/'.$name; ?>" <?php if($wps_option_data['style'] == 'image/'.$name){echo "checked";}?>/>
-                		<img src='<?php echo plugin_dir_url( __FILE__ );?>styles/<?php echo $style_name . '/' . $name . '/'; ?>11.jpg'>
+                		<input type="radio" id="img1" name="wps_visitor_counter_style" value="<?php echo esc_attr( 'image/'.$name ); ?>" <?php if($wps_option_data['style'] == 'image/'.$name){echo "checked";}?>/>
+                		<img src='<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'styles/' . esc_attr( $style_name ) . '/' . esc_attr( $name ) . '/11.jpg' ); ?>' alt="<?php echo esc_attr( $style_name . ' ' . $name ); ?>">
         
                 		</td>
                 	</tr>
